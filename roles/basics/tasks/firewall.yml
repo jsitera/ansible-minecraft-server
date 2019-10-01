@@ -1,0 +1,18 @@
+---
+#- ufw:
+#    rule: allow
+#    port: '{{ssh_port}}'
+#    proto: tcp
+#  tags: ufw
+#
+#- ufw:
+#    state: enabled
+#  tags: ufw
+#    
+- name: SSH config
+  blockinfile:
+    dest: /etc/ssh/sshd_config
+    block: |
+      PermitRootLogin without-password
+      Port {{ssh_port}}
+  notify: restart sshd

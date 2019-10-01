@@ -1,0 +1,7 @@
+- name: Add the user 'sitera'
+  user:
+    name: sitera
+    comment: Jiri Sitera
+    group: users
+    groups: docker
+    shell: /bin/bash

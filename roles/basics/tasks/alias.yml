@@ -1,0 +1,7 @@
+- name: Add aliases to root .bashrc
+  lineinfile:
+    dest: /root/.bashrc
+    line: '{{ item }}'
+  with_items:
+    - "alias ll='ls -l'"
+    - "alias l='ls -l'"

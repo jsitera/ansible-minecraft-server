@@ -1,0 +1,21 @@
+---
+- name: Install basic packages
+  apt:
+    name:
+     - curl
+     - unzip
+     - net-tools
+     - htop
+     - wget
+     - mc
+     - git
+     - ntp
+     - ufw
+    state: present
+    autoclean: yes
+  tags: packages
+
+- name: Upgrade all packages
+  apt:
+    update_cache: yes
+    upgrade: safe

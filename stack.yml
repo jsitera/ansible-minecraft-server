@@ -1,0 +1,14 @@
+---
+- name: Install Basics
+  hosts: all
+  roles:
+    - docker
+    - basics
+
+
+- name: Minecraft server
+  hosts: aether3
+  roles:
+    - minecraft-user
+#    - minecraft-user-backup
+    - minecraft-docker

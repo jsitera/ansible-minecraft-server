@@ -1,0 +1,32 @@
+---
+#- name: Set hostname
+#  hostname: name="{{ inventory_hostname }}"
+
+- name: Add SSH keys
+  authorized_key:
+    user: root
+    state: present
+    key: "{{ item }}"
+  with_items: "{{ ssh_keys }}" 
+
+
+#- name: Build hosts file
+#  lineinfile:
+#    dest: /etc/hosts
+#    regexp: "{{item}}$"
+#    line: '{{ hostvars[item].ansible_default_ipv4.address }} {{item}}'
+#    state: present
+#  with_items: '{{ ansible_play_hosts }}'
+#  tags: hosts
+
+- name: Set timezone to Europe/Prague
+  timezone: 
+    name: Europe/Prague
+
+- include: packages.yml
+
+- include: firewall.yml
+
+- include: alias.yml
+
+- include: user.yml
