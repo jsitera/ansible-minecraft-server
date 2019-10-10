@@ -1,0 +1,27 @@
+- name: Install pip
+  apt: name=python-pip state=present
+
+- name: install docker-py package
+  pip: name=docker-py
+
+# create a directory if it doesn't exist
+- name: Directory server-data-scriptcraft
+  file:
+    path: /home/minecraft/server-data-scriptcraft
+    state: directory
+    mode: 0775
+    owner: minecraft
+    group: minecraft
+
+# https://github.com/tclavier/docker-scriptcraft
+- name: Ensure docker instance with minecraft server is running
+  docker_container:
+    name: scriptcraft
+    image: tclavier/scriptcraft
+    volumes:
+      - /home/minecraft/server-data-scriptcraft:/minecraft
+    ports:
+      - 25567:25565
+#      - 2022:22
+    env:
+        ONLINE_MODE: "false"
