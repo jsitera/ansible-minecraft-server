@@ -12,5 +12,11 @@
       - /home/minecraft/server-data:/data
     ports:
       - 25566:25565
+    tty: yes
+    interactive: yes
     env:
         EULA: "TRUE"
+        ENABLE_COMMAND_BLOCK: "TRUE"
+#	VERSION: "1.8.9"
+        MOTD: "IoTlab ZCU Minecraft server"
+        MEMORY: "3G"
