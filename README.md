@@ -2,6 +2,7 @@
 Automated setup of Minecraft server in the cloud VM using Docker and Ansible.
 
 # Usage
+Create a VM in cloud with at least 4GB RAM, setup root access via SSH.
 
 Clone the repository, add hosts file with your VM address and run the ansible script.
 
@@ -20,3 +21,6 @@ Ansible command
 ```
 ansible-playbook stack.yml -l VM1
 ```
+
+# TODO/Limitations
+* Better handling of options, for now please edit the appropriate main.yml files.
