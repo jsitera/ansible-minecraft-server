@@ -4,23 +4,10 @@
 - name: install docker-py package
   pip: name=docker-py
 
-- name: Directory server-data/plugins
-  file:
-    path: /home/minecraft/server-data/plugins
-    state: directory
-    mode: 0775
-    owner: minecraft
-    group: minecraft
-
-# absolute URL to one version of worldedit
-# https://github.com/EngineHub/WorldEdit
-- name: Install worldedit
-  get_url:
-    url: http://home.zcu.cz/~sitera/worldedit-bukkit-7.1.0-beta-1.jar
-    dest: /home/minecraft/server-data/plugins
-    mode: '0664'
-    owner: minecraft
-    group: minecraft
+# Plugins - installs plugins/mods from given URL
+# - WorldEdit - https://github.com/EngineHub/WorldEdit
+#   - note: WorldEdit needs OP player status
+# World - installs world from zip file if none exists
 
 - name: Ensure docker instance with minecraft server is running
   docker_container:
@@ -34,8 +21,13 @@
     interactive: yes
     env:
         EULA: "TRUE"
-        TYPE: "BUKKIT"
+        # TYPE: "BUKKIT"
+        TYPE: "PAPER"
         ENABLE_COMMAND_BLOCK: "TRUE"
-        VERSION: "1.15.1-R0.1-SNAPSHOT"
+        VERSION: "1.15.2"
         MOTD: "IoTlab ZCU Minecraft server"
         MEMORY: "3G"
+        # WorldEdit URL / TODO find a better solution
+        MODS: "http://home.zcu.cz/~sitera/worldedit-bukkit-7.1.0-beta-1.jar"
+        # install this world if there is none
+        WORLD: "http://home.zcu.cz/~sitera/MinecraftUltimateTutorial.zip"
