@@ -1,3 +1,7 @@
+# https://askubuntu.com/questions/1180060/getting-error-while-installing-docker-docker-ce-depends-containerd-io-1
+# curl -O https://download.docker.com/linux/ubuntu/dists/bionic/pool/edge/amd64/containerd.io_1.2.2-3_amd64.deb
+# apt install ./containerd.io_1.2.2-3_amd64.deb
+
 ---
 - name: Install required system packages
   apt: name={{ item }} state=latest update_cache=yes
