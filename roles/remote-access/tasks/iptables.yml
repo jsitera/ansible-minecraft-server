@@ -1,0 +1,7 @@
+- name: Firewall rule - allow port 22/SSH for the whole Internet
+  iptables:
+    chain: INPUT
+    destination_port: 22
+    jump: ACCEPT
+    protocol: tcp
+    comment: "22/SSH allowed from whole Internet"

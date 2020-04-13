@@ -1,0 +1,17 @@
+Vzdálený přístup na Minecraft server
+====================================
+
+- SSH/22 např. přes tera term
+- uživatel minecraft, povolen přístup heslem
+- povoleno z celého Internetu
+- fail2ban - tj. dočasně se blokují IP adresy, ze kterých přišly
+  neúspěšné pokusy o přihlášení
+
+
+Fail2ban návod
+==============
+- zjištění aktuálního stavu včetně blokavných adres
+
+  fail2ban-client status sshd
+
+- automaticky se adresa odblokuje po jedné hodině
