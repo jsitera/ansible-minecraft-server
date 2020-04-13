@@ -1,4 +1,17 @@
 ---
+# not use ufw in ZCU cloud
+# add -A LOCAL iptables rules instead
+
+- name: Insert iptables rule for SSH 22 single IP
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    source: 46.23.61.151
+    destination_port: 22
+    jump: ACCEPT
+    comment: "Allow SSH from JS home"
+
+
 #- ufw:
 #    rule: allow
 #    port: '{{ssh_port}}'
