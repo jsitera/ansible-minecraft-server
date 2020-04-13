@@ -19,3 +19,11 @@
     mode: 0775
     owner: minecraft
     group: minecraft
+
+# CIV cloud specific / kerberos PAM module
+# allow local password for users under 2000
+- name: The kerberos module line 
+  lineinfile:
+    path: /etc/pam.d/common-password
+    regexp: '^password.*pam_krb5.so'
+    line: 'password        [success=2 default=ignore]      pam_krb5.so minimum_uid=2000'
