@@ -1,7 +1,3 @@
-# https://askubuntu.com/questions/1180060/getting-error-while-installing-docker-docker-ce-depends-containerd-io-1
-# curl -O https://download.docker.com/linux/ubuntu/dists/bionic/pool/edge/amd64/containerd.io_1.2.2-3_amd64.deb
-# apt install ./containerd.io_1.2.2-3_amd64.deb
-
 ---
 - name: Install required system packages
   apt: name={{ item }} state=latest update_cache=yes
@@ -9,12 +5,12 @@
 
 - name: Add Docker GPG apt Key
   apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
+    url: https://download.docker.com/linux/debian/gpg
     state: present
 
 - name: Add Docker Repository
   apt_repository:
-    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    repo: deb [arch=amd64] https://download.docker.com/linux/debian buster stable
     state: present
 
 - name: Update apt and install docker-ce
