@@ -9,10 +9,25 @@
 # CIV cloud specific - CF engine rules are OK here
 # access via password auth allowed by default in sshd_config
 
-# CIV cloud specific - /etc/hosts.allow
-# TODO / need to stop cfengine3
+# CIV cloud specific - remove cfengine - be aware!
+# need to stop cfengine3
+# use just dpkg -r cfengine-community
 # comment /etc/cron.d/cfengine, stop the service cfengine3
 # service cfengine3 status
+- name: Disable cfengine by removing it
+  action: apt pkg=cfengine-community state=absent
+
+
+# CIV cloud specific - /etc/hosts.allow
+# /etc/hosts.allow
+# comment sshd and add
+# sshd: ALL
+- name: Allow ssh from whole Internet in hosts.allow
+  lineinfile:
+    path: /etc/hosts.allow
+    state: present
+    regexp: '^sshd:'
+    line: 'sshd: ALL'
 
 # use fail2ban
 - include: fail2ban.yml
