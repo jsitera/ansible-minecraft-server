@@ -1,0 +1,29 @@
+# Minecraft server with MQTT input and output scripts each
+# in its own docker container
+#
+# start minecraft server: docker-compose up -d mc
+# start input script: docker-compose up -d mc-rcon
+# stop and remove docker containers: docker-compose down
+
+version: '3'
+
+services:
+  mc:
+    image: itzg/minecraft-server
+    ports:
+      - "25565:25565"
+    volumes:
+      - "/home/minecraft/server-data:/data"
+    environment:
+      EULA: "TRUE"
+      VERSION: 1.16.3
+      TYPE: "BUKKIT"
+      ENABLE_COMMAND_BLOCK: "TRUE"
+      MOTD: "ESPblock Minecraft server"
+      MEMORY: "4G"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "xxxxxx"
+
+    #restart: always
+  mc-rcon:
+    image: sitera/mc-rcon-mqtt
