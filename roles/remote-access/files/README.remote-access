@@ -15,3 +15,7 @@ Fail2ban návod
   fail2ban-client status sshd
 
 - automaticky se adresa odblokuje po jedné hodině
+
+- unban
+
+  fail2ban-client set sshd unbanip <ip address>
