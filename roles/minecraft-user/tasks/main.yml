@@ -1,11 +1,13 @@
 - name: Ensure group minecraft exists
   group:
     name: minecraft
+#    gid: 1000
     state: present
 
 - name: Add the user minecraft
   user:
     name: minecraft
+    uid: 1000
     comment: Minecraft Server
     group: minecraft
     groups: docker
@@ -20,10 +22,10 @@
     owner: minecraft
     group: minecraft
 
-# CIV cloud specific / kerberos PAM module
-# allow local password for users under 2000
-- name: The kerberos module line 
-  lineinfile:
-    path: /etc/pam.d/common-password
-    regexp: '^password.*pam_krb5.so'
-    line: 'password        [success=2 default=ignore]      pam_krb5.so minimum_uid=2000'
+# allow ssh access via ssh key
+- name: Setup authorized key
+  authorized_key:
+    user: minecraft
+    state: present
+    key: "{{ lookup('file', 'jirik.pub') }}"
+
