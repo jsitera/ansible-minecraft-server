@@ -1,6 +1,7 @@
 - name: Add the user 'sitera'
   user:
     name: sitera
+    uid: 1001
     comment: Jiri Sitera
     group: users
     groups: docker

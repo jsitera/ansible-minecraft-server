@@ -3,4 +3,4 @@ ssh_port: 22
 
 ssh_keys:
   - "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
- 
+  - http://home.zcu.cz/~honza801/id_ecdsa.pub

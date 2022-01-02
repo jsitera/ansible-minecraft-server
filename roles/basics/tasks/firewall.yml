@@ -1,6 +1,7 @@
 ---
 # not use ufw in ZCU cloud
 # add -A LOCAL iptables rules instead
+# this is not persistent
 
 - name: Insert iptables rule for SSH 22 single IP
   iptables:
