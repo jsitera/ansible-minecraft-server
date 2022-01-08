@@ -2,7 +2,7 @@
 - name: Allow ssh from whole Internet via CIV cloud specific rules
   lineinfile:
     path: /etc/iptables/rules.v4.local
-    line: -A INPUT -p tcp -m tcp --dport 22 -m comment --comment "22/SSH allowed from whole Internet" -j ACCEPT
+    line: -A ZCU_SHELL -s 0.0.0.0/0 -p tcp -m tcp --dport 22 -m comment --comment "22/SSH allowed from whole Internet" -j ACCEPT
     insertbefore: '^COMMIT'
     create: yes
 
