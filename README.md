@@ -26,11 +26,11 @@ ansible-playbook stack.yml -l VM1
 ```
 
 # roles
-## basics - basic setup of VM
-## minecraft-user - create user minecraft where all all services are running
-## remote-access - setup remote access to the VM (via SSH with keys)
-## docker - install docker - deprecated - i'm using geerlingguy.docker
-## minecraft-docker - configure minecraft docker container, alternatively use docker-compose.yml
+* basics - basic setup of VM
+* minecraft-user - create user minecraft where all all services are running
+* remote-access - setup remote access to the VM (via SSH with keys)
+* docker - install docker - deprecated - i'm using geerlingguy.docker
+* minecraft-docker - configure minecraft docker container, alternatively use docker-compose.yml
 
 # TODO/Limitations
 * Better handling of options, for now please edit the appropriate main.yml files.
