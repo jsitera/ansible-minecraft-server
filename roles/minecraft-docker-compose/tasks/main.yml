@@ -1,0 +1,42 @@
+# create a directory if it doesn't exist
+- name: Directory mc
+  file:
+    path: /home/minecraft/mc
+    state: directory
+    mode: 0775
+    owner: minecraft
+    group: minecraft
+- name: Directory server-data
+  file:
+    path: /home/minecraft/mc/server-data
+    state: directory
+    mode: 0775
+    owner: minecraft
+    group: minecraft
+
+# copy example docker.compose file toho /home/minecraft/mc
+- name: Copy docker.compose files toho /home/minecraft/mc
+  copy:
+    src: files/{{ item }}
+    dest: /home/minecraft/mc/{{ item }}
+  loop:
+  - docker-compose.yml
+
+- name: Install docker python module 
+  apt:
+    name:
+     - python3-docker
+     - python3-pip
+    state: present
+    autoclean: yes
+
+- name: Install docker python module via pip
+  pip:
+    name: docker
+    name: docker-compose
+
+- name: deploy Docker Compose stack
+  docker_compose:
+    project_src: /home/minecraft/mc
+    files:
+    - docker-compose.yml

@@ -13,15 +13,6 @@
     groups: docker
     shell: /bin/bash
 
-# create a directory if it doesn't exist
-- name: Directory server-data
-  file:
-    path: /home/minecraft/server-data
-    state: directory
-    mode: 0775
-    owner: minecraft
-    group: minecraft
-
 # allow ssh access via ssh key
 - name: Setup authorized key
   authorized_key:
