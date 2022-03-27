@@ -1,6 +1,7 @@
 # install Minecraft server via Ansible
 # install just one server: ansible-playbook -l aether1 stack.yml
 # ansible-galaxy install geerlingguy.docker
+# ansible-galaxy collection install community.docker
 
 ---
 - name: Install Basics
@@ -11,7 +12,11 @@
     - remote-access
     
 - name: Minecraft server with plain docker
-  hosts: ourea102,sulis23
+  hosts: ourea102,sulis23,sulis68,sulis20
   roles:
     - minecraft-user
 
+- name: Minecraft server with docker compose
+  hosts: sulis68
+  roles:
+    - minecraft-docker-compose
