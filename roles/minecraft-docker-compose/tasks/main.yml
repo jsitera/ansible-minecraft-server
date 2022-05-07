@@ -15,10 +15,12 @@
     group: minecraft
 
 # copy example docker.compose file toho /home/minecraft/mc
+# only if it doesn't exist
 - name: Copy docker.compose files toho /home/minecraft/mc
   copy:
     src: files/{{ item }}
     dest: /home/minecraft/mc/{{ item }}
+    force: no
   loop:
   - docker-compose.yml
 

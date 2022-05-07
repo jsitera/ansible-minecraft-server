@@ -2,6 +2,9 @@
 #
 # start minecraft server: docker-compose up -d 
 # stop and remove docker container: docker-compose down
+# 
+# for more information and docker-compose file to run ESPCraft see
+# ESPCraft https://github.com/jirisitera/ESPblock/tree/main/ESPblock-server
 
 version: '3'
 
