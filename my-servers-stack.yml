@@ -20,3 +20,8 @@
   hosts: sulis68
   roles:
     - minecraft-docker-compose
+
+- name: Minecraft server with MC-RCON-MQTT
+  hosts: sulis20
+  roles:
+    - minecraft-docker-compose
