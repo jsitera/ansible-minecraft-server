@@ -1,0 +1,55 @@
+# CIV cloud specific / kerberos PAM module
+# allow local password for users under 2000
+- name: The kerberos module line 
+  lineinfile:
+    path: /etc/pam.d/common-password
+    regexp: '^password.*pam_krb5.so'
+    line: 'password        [success=2 default=ignore]      pam_krb5.so minimum_uid=2000'
+
+# CIV cloud specific - CF engine rules are OK here
+# access via password auth allowed by default in sshd_config
+
+# CIV cloud specific - remove cfengine - be aware!
+# need to stop cfengine3
+# systemctl disable cfengine
+# systemctl disable cf-execd
+# systemctl stop cfengine3
+# comment /etc/cron.d/cfengine, stop the service cfengine3
+# service cfengine3 status
+# apt remove --purge cfengine-community
+- name: Disable cfengine by removing it
+  action: apt pkg=cfengine-community state=absent
+
+
+# CIV cloud specific - /etc/hosts.allow
+# /etc/hosts.allow
+# comment sshd and add
+# sshd: ALL
+- name: Allow ssh from whole Internet in hosts.allow
+  lineinfile:
+    path: /etc/hosts.allow
+    state: present
+    regexp: '^sshd:'
+    line: 'sshd: ALL'
+
+# use fail2ban
+- include: fail2ban.yml
+
+# allow access to ssh for whole Internet
+- include: iptables.yml
+
+# set user password / not implemented, set it by hand
+
+# copy readme file to /home/minecraft
+- name: Copy readme file to /home/minecraft
+  copy:
+    src: README.remote-access
+    dest: /home/minecraft
+    owner: minecraft
+    group: minecraft
+    mode: 0444
+
+
+
+###########################################################
+# see also https://github.com/joelhans/ssdnodes-ansible-provision
